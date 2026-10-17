@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Tab Settings Sync</title>
+    <!-- Inline script to apply dark mode instantly before render -->
+    <script>
+      try {
+        const saved = localStorage.getItem('app_preferences');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.darkMode) {
+            document.documentElement.classList.add('dark');
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load initial theme', e);
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
