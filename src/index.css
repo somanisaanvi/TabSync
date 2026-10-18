@@ -5,8 +5,8 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Solid Clean Light Theme (No Glassmorphism) */
-  --bg-canvas: #f8fafc;
-  --bg-canvas-subtle: #f1f5f9;
+  --bg-canvas: #ffffff;
+  --bg-canvas-subtle: #ffffff;
   --bg-card: #ffffff;
   --bg-card-subtle: #f8fafc;
   --bg-card-hover: #f1f5f9;
@@ -21,8 +21,8 @@
   --accent-hover: #4338ca;
   --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
   --accent-glow: 0 4px 12px rgba(79, 70, 229, 0.2);
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --card-shadow: none;
+  --card-shadow-hover: none;
   --toggle-track-bg: #e2e8f0;
   --toggle-thumb-bg: #ffffff;
   --badge-bg: #eef2ff;
@@ -37,12 +37,12 @@
 }
 
 html.dark {
-  /* Solid Clean Dark Theme (No Glassmorphism) */
+  /* Solid Clean Dark Theme (No Glassmorphism, No Floating Shadows) */
   --bg-canvas: #0f172a;
-  --bg-canvas-subtle: #1e293b;
-  --bg-card: #1e293b;
-  --bg-card-subtle: #0f172a;
-  --bg-card-hover: #334155;
+  --bg-canvas-subtle: #0f172a;
+  --bg-card: #0f172a;
+  --bg-card-subtle: #1e293b;
+  --bg-card-hover: #1e293b;
   --bg-elevated: #1e293b;
   --border-color: #334155;
   --border-strong: #475569;
@@ -53,18 +53,20 @@ html.dark {
   --accent-secondary: #818cf8;
   --accent-hover: #818cf8;
   --accent-gradient: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
-  --accent-glow: 0 4px 12px rgba(99, 102, 241, 0.3);
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  --toggle-track-bg: #0f172a;
-  --toggle-thumb-bg: #1e293b;
-  --badge-bg: rgba(99, 102, 241, 0.15);
+  --accent-glow: none;
+  --card-shadow: none;
+  --card-shadow-hover: none;
+  --toggle-track-bg: #1e293b;
+  --toggle-thumb-bg: #0f172a;
+  --badge-bg: #1e293b;
   --badge-text: #a5b4fc;
 
   color-scheme: dark;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;

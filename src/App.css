@@ -161,13 +161,13 @@
 .theme-segment-btn.active {
   background-color: var(--bg-card);
   color: var(--text-primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 html.dark .theme-segment-btn.active {
   background-color: var(--accent-primary);
   color: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent-primary);
 }
 
 /* Open Test Tab Button in Header */
@@ -184,7 +184,6 @@ html.dark .theme-segment-btn.active {
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: var(--accent-glow);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
@@ -216,14 +215,14 @@ html.dark .theme-segment-btn.active {
   margin: 0 auto;
 }
 
-/* Main Dashboard Card (Solid card, no blur/glassmorphism) */
+/* Main Dashboard Card (Pure solid flat card, zero glassmorphism or shadows) */
 .dashboard-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  box-shadow: var(--card-shadow);
+  box-shadow: none;
   padding: 2.25rem;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .card-title {
