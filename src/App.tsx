@@ -8,7 +8,6 @@ interface TranslationSchema {
   banner: string;
   font: string;
   fontDesc: string;
-  presets: { compact: string; normal: string; relaxed: string; large: string };
   lastSynced: string;
   openNewTab: string;
   openTabTooltip: string;
@@ -23,7 +22,6 @@ const translations: Record<Language, TranslationSchema> = {
     banner: 'Changes broadcast in real time across all open tabs via the native BroadcastChannel API with Last-Write-Wins conflict resolution.',
     font: 'Typography Scale',
     fontDesc: 'Adjust baseline font scaling across all connected tabs.',
-    presets: { compact: 'Compact', normal: 'Default', relaxed: 'Comfortable', large: 'Large' },
     lastSynced: 'Last Synced',
     openNewTab: 'Open Test Tab',
     openTabTooltip: 'Open another tab side-by-side to test live sync',
@@ -36,7 +34,6 @@ const translations: Record<Language, TranslationSchema> = {
     banner: 'Los cambios se transmiten al instante a todas las pestañas abiertas mediante la API BroadcastChannel con resolución Last-Write-Wins.',
     font: 'Escala Tipográfica',
     fontDesc: 'Ajusta el tamaño tipográfico base en todas las pestañas conectadas.',
-    presets: { compact: 'Compacto', normal: 'Por defecto', relaxed: 'Cómodo', large: 'Grande' },
     lastSynced: 'Última Sincronización',
     openNewTab: 'Abrir Pestaña de Prueba',
     openTabTooltip: 'Abre otra pestaña para probar la sincronización en vivo',
@@ -49,7 +46,6 @@ const translations: Record<Language, TranslationSchema> = {
     banner: 'Les modifications sont diffusées instantanément via l’API native BroadcastChannel avec résolution de conflit Last-Write-Wins.',
     font: 'Échelle Typographique',
     fontDesc: 'Ajustez la taille de police de base sur tous les onglets connectés.',
-    presets: { compact: 'Compact', normal: 'Défaut', relaxed: 'Confortable', large: 'Grand' },
     lastSynced: 'Dernière Synchro',
     openNewTab: 'Ouvrir un Onglet',
     openTabTooltip: 'Ouvrez un autre onglet pour tester la synchronisation',
@@ -62,7 +58,6 @@ const translations: Record<Language, TranslationSchema> = {
     banner: 'Änderungen werden über die native BroadcastChannel-API mit Last-Write-Wins-Konfliktlösung sofort an alle offenen Tabs übertragen.',
     font: 'Schriftgrößen-Skalierung',
     fontDesc: 'Passen Sie die Schriftgröße über alle verbundenen Tabs hinweg an.',
-    presets: { compact: 'Kompakt', normal: 'Standard', relaxed: 'Komfortabel', large: 'Groß' },
     lastSynced: 'Zuletzt synchronisiert',
     openNewTab: 'Test-Tab öffnen',
     openTabTooltip: 'Weiteren Tab nebeneinander öffnen',
@@ -86,19 +81,12 @@ export default function App() {
     second: '2-digit',
   });
 
-  const fontSizePresets = [
-    { label: t.presets.compact, size: 13 },
-    { label: t.presets.normal, size: 16 },
-    { label: t.presets.relaxed, size: 18 },
-    { label: t.presets.large, size: 22 },
-  ];
-
   return (
     <div className="app-wrapper">
-      {/* Navigation Header with Upper-Right Controls */}
+      {/* Navigation Header with Controls spanning extreme left to extreme right */}
       <header className="app-header">
         <div className="header-inner">
-          {/* Brand Logo: Only TabSync */}
+          {/* Brand Logo: Extreme Left */}
           <div className="header-brand">
             <div className="brand-icon-wrapper" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -110,7 +98,7 @@ export default function App() {
             <span className="brand-name">TabSync</span>
           </div>
 
-          {/* Upper-Right Controls: Language Dropdown, Theme Toggle (Light/Dark text), and New Tab Action */}
+          {/* Settings Controls: Extreme Right */}
           <div className="header-actions">
             {/* Language Selector Dropdown */}
             <div className="lang-dropdown-wrapper">
@@ -136,7 +124,7 @@ export default function App() {
               </svg>
             </div>
 
-            {/* Upper-Right Theme Toggle with simple "Light" and "Dark" text */}
+            {/* Upper-Right Theme Toggle with simple Light and Dark text */}
             <div className="theme-segmented-control" role="group" aria-label="Theme selection">
               <button
                 type="button"
@@ -225,24 +213,10 @@ export default function App() {
                     <span>24px</span>
                   </div>
                 </div>
-
-                {/* Preset Chips */}
-                <div className="preset-pills">
-                  {fontSizePresets.map((preset) => (
-                    <button
-                      key={preset.size}
-                      type="button"
-                      onClick={() => updatePreferences({ fontSize: preset.size })}
-                      className={`preset-pill ${preferences.fontSize === preset.size ? 'active' : ''}`}
-                    >
-                      {preset.label} ({preset.size}px)
-                    </button>
-                  ))}
-                </div>
               </div>
             </div>
 
-            {/* Diagnostics & Synchronization Telemetry */}
+            {/* Synchronization Telemetry Footer (Clean Last Synced display without the extra clicker) */}
             <footer className="card-footer">
               <div className="telemetry-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -251,19 +225,6 @@ export default function App() {
                 </svg>
                 <span>{t.lastSynced}: <span className="telemetry-time">{formattedTime}</span></span>
               </div>
-
-              <button
-                type="button"
-                onClick={handleOpenNewTab}
-                className="test-link-btn"
-              >
-                <span>{t.openNewTab}</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </button>
             </footer>
           </section>
         </div>
