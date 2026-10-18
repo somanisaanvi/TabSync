@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-Tab Settings Sync</title>
+    <title>TabSync — Real-Time Cross-Tab Settings Synchronization</title>
+    <meta name="description" content="Seamless real-time browser settings synchronization across multiple tabs using BroadcastChannel API." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <!-- Inline script to apply dark mode instantly before render -->
     <script>
       try {
@@ -13,13 +17,16 @@
           if (parsed.darkMode) {
             document.documentElement.classList.add('dark');
           }
+          if (parsed.fontSize) {
+            document.documentElement.style.fontSize = parsed.fontSize + 'px';
+          }
         }
       } catch (e) {
         console.error('Failed to load initial theme', e);
       }
     </script>
   </head>
-  <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
