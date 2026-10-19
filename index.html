@@ -1,33 +1,40 @@
+<!-- prevents theme flickering -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TabSync — Real-Time Cross-Tab Settings Synchronization</title>
-    <meta name="description" content="Seamless real-time browser settings synchronization across multiple tabs using BroadcastChannel API." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Inline script to apply dark mode instantly before render -->
-    <script>
-      try {
-        const saved = localStorage.getItem('app_preferences');
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed.darkMode) {
-            document.documentElement.classList.add('dark');
-          }
-          if (parsed.fontSize) {
-            document.documentElement.style.fontSize = parsed.fontSize + 'px';
-          }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TabSync — Real-Time Cross-Tab Settings Synchronization</title>
+  <meta name="description"
+    content="Seamless real-time browser settings synchronization across multiple tabs using BroadcastChannel API." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script>
+    try {
+      //retrieves the raw JSON string of saved user preferences
+      const saved = localStorage.getItem('app_preferences');
+      if (saved) {
+        const parsed = JSON.parse(saved); //parses JSON string to JavaScript object
+        if (parsed.darkMode) {
+          document.documentElement.classList.add('dark');
         }
-      } catch (e) {
-        console.error('Failed to load initial theme', e);
+        if (parsed.fontSize) {
+          document.documentElement.style.fontSize = parsed.fontSize + 'px';
+        }
       }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    } catch (e) {
+      console.error('Failed to load initial theme', e);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
