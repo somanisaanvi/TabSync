@@ -12,7 +12,7 @@ const defaultPreferences: UserPreferences = {
 };
 
 export function usePreferences() {
-  // 1. Initialize state from localStorage or defaults
+  // initializing state from localStorage or defaults
   const [preferences, setPreferencesState] = useState<UserPreferences>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -23,7 +23,7 @@ export function usePreferences() {
     return defaultPreferences;
   });
 
-  // 2. Setup BroadcastChannel
+  // setting up BroadcastChannel
   useEffect(() => {
     const channel = new BroadcastChannel(CHANNEL_NAME);
 
@@ -31,7 +31,7 @@ export function usePreferences() {
       if (event.data.type === 'PREFERENCES_UPDATE') {
         const incoming = event.data.payload;
 
-        // Conflict Resolution: Last-Write-Wins based on timestamp
+        // resolving conflicts - Last-Write-Wins based on timestamp
         setPreferencesState((current) => {
           if (incoming.updatedAt > current.updatedAt) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(incoming));
@@ -48,7 +48,7 @@ export function usePreferences() {
     };
   }, []);
 
-  // Helper to apply DOM changes (dark mode class & font size)
+  // apply DOM changes (dark mode class & font size)
   const applyDomChanges = (prefs: UserPreferences) => {
     if (prefs.darkMode) {
       document.documentElement.classList.add('dark');
@@ -58,7 +58,7 @@ export function usePreferences() {
     document.documentElement.style.fontSize = `${prefs.fontSize}px`;
   };
 
-  // 3. Function to update preferences from UI
+  // function to update preferences from UI
   const updatePreferences = useCallback((newValues: Partial<UserPreferences>) => {
     setPreferencesState((current) => {
       const updated: UserPreferences = {
@@ -67,11 +67,10 @@ export function usePreferences() {
         updatedAt: Date.now(), // Stamp with current time
       };
 
-      // Persist locally
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       applyDomChanges(updated);
 
-      // Broadcast to other tabs instantly
+      // broadcasting changes to other tabs instantly
       const channel = new BroadcastChannel(CHANNEL_NAME);
       channel.postMessage({ type: 'PREFERENCES_UPDATE', payload: updated });
       channel.close();
@@ -80,7 +79,6 @@ export function usePreferences() {
     });
   }, []);
 
-  // Apply on initial mount
   useEffect(() => {
     applyDomChanges(preferences);
   }, []);
